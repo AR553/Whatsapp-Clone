@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp/utilities/constants.dart';
 import 'package:whatsapp/view/calls_page.dart';
+import 'package:whatsapp/view/camera_page.dart';
 import 'package:whatsapp/view/chats_page.dart';
 import 'package:whatsapp/view/status_page.dart';
 
@@ -16,8 +17,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         body: NestedScrollView(
           controller: _scrollController,
@@ -50,8 +53,15 @@ class _HomePageState extends State<HomePage> {
                   // onTap: (index) {
                   //   print('Current Index = ' + index.toString());
                   // },
+                  labelPadding: EdgeInsets.symmetric(horizontal: width/16.0),
+                  isScrollable: true,
                   indicatorColor: accentColor,
                   tabs: <Widget>[
+                    Container(
+                            width: 10.0,
+                            padding: const EdgeInsets.only(bottom: 12.0),
+                            child: Icon(Icons.camera_alt),
+                    ),
                     Container(
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: Row(
@@ -99,6 +109,7 @@ class _HomePageState extends State<HomePage> {
           },
           body: TabBarView(
             children: <Widget>[
+              CameraPage(),
               ChatsPage(),
               StatusPage(),
               CallsPage(),
